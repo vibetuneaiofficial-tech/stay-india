@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102c35">
+  <meta name="description" content="Discover hotels and stays across India with STAY.">
+  <title>STAY | Discover Your Stay</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7f6;
+      color: #172c32;
+    }
+    header {
+      background: #102c35;
+      color: white;
+      padding: 20px;
+    }
+    .nav {
+      max-width: 1000px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { font-size: 27px; font-weight: bold; letter-spacing: 3px; }
+    .tag { color: #c9dedb; font-size: 12px; }
+    .hero {
+      background: linear-gradient(135deg,#153d45,#327c72);
+      color: white;
+      padding: 48px 20px;
+      text-align: center;
+    }
+    .hero h1 { font-size: 34px; margin: 0 0 12px; }
+    .hero p { color: #d9e9e5; line-height: 1.6; }
+    .search {
+      background: white;
+      color: #172c32;
+      max-width: 900px;
+      margin: 25px auto 0;
+      padding: 18px;
+      border-radius: 15px;
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 12px;
+      text-align: left;
+    }
+    label { font-size: 12px; font-weight: bold; }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 7px;
+      border: 1px solid #dce4e1;
+      border-radius: 8px;
+      font-size: 14px;
+      background: white;
+    }
+    button {
+      background: #d69d55;
+      color: #172c32;
+      border: none;
+      padding: 14px;
+      border-radius: 9px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .search button { grid-column: 1/-1; }
+    main { max-width: 1000px; margin: auto; padding: 28px 18px; }
+    h2 { font-size: 23px; }
+    .sub { color: #687b7b; font-size: 14px; }
+    .cities {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    .city {
+      background: #e3eeeb;
+      border-radius: 30px;
+      padding: 10px 16px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .hotels {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+      gap: 17px;
+    }
+    .hotel {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 3px 15px #193c3c12;
+    }
+    .photo {
+      height: 145px;
+      display: grid;
+      place-items: center;
+      font-size: 65px;
+      background: linear-gradient(135deg,#b7d5c9,#e6d7bd);
+    }
+    .details { padding: 16px; }
+    .details h3 { margin: 0 0 8px; }
+    .details p { color: #71817d; font-size: 13px; }
+    .price { font-weight: bold; margin: 15px 0; }
+    .details button { width: 100%; }
+    .notice {
+      background: #fff4df;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 25px;
+    }
+    footer {
+      background: #102c35;
+      color: white;
+      padding: 25px;
+      text-align: center;
+      font-size: 13px;
+    }
+    @media(max-width:480px) {
+      .hero h1 { font-size: 28px; }
+      .search { grid-template-columns: 1fr; }
+      .search button { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div>
+      <div class="logo">STAY.</div>
+      <div class="tag">DISCOVER YOUR STAY</div>
+    </div>
+    <div>India's Hotel Guide</div>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Find Your Perfect Stay</h1>
+  <p>Discover places to stay, explore destinations<br>and plan your next journey.</p>
+
+  <div class="search">
+    <div>
+      <label for="location">DESTINATION</label>
+      <input id="location" placeholder="Enter city, e.g. Chandrapur">
+    </div>
+    <div>
+      <label for="checkin">CHECK-IN</label>
+      <input id="checkin" type="date">
+    </div>
+    <div>
+      <label for="checkout">CHECK-OUT</label>
+      <input id="checkout" type="date">
+    </div>
+    <div>
+      <label for="guests">GUESTS</label>
+      <input id="guests" type="number" min="1" value="2">
+    </div>
+    <button onclick="searchHotels()">Search Hotels</button>
+  </div>
+</section>
+
+<main>
+  <h2>Explore Destinations</h2>
+  <p class="sub">Choose a destination to explore.</p>
+
+  <div class="cities">
+    <span class="city" onclick="chooseCity('Chandrapur')">📍 Chandrapur</span>
+    <span class="city" onclick="chooseCity('Nagpur')">📍 Nagpur</span>
+    <span class="city" onclick="chooseCity('Mumbai')">📍 Mumbai</span>
+    <span class="city" onclick="chooseCity('Pune')">📍 Pune</span>
+  </div>
+
+  <h2>Discover Stays</h2>
+  <p class="sub" id="resultText">Explore our sample hotel listings.</p>
+
+  <div class="hotels" id="hotelList">
+    <article class="hotel" data-city="Chandrapur">
+      <div class="photo">🏨</div>
+      <div class="details">
+        <h3>Sample Comfort Stay</h3>
+        <p>📍 Chandrapur, Maharashtra</p>
+        <p>Wi-Fi · Parking · AC</p>
+        <div class="price">₹1,200 / night</div>
+        <button onclick="hotelDetails('Sample Comfort Stay')">View Details</button>
+      </div>
+    </article>
+
+    <article class="hotel" data-city="Nagpur">
+      <div class="photo">🏩</div>
+      <div class="details">
+        <h3>Sample City Retreat</h3>
+        <p>📍 Nagpur, Maharashtra</p>
+        <p>Wi-Fi · Restaurant · AC</p>
+        <div class="price">₹1,800 / night</div>
+        <button onclick="hotelDetails('Sample City Retreat')">View Details</button>
+      </div>
+    </article>
+
+    <article class="hotel" data-city="Mumbai">
+      <div class="photo">🌆</div>
+      <div class="details">
+        <h3>Sample Urban Escape</h3>
+        <p>📍 Mumbai, Maharashtra</p>
+        <p>Wi-Fi · City View · AC</p>
+        <div class="price">₹2,500 / night</div>
+        <button onclick="hotelDetails('Sample Urban Escape')">View Details</button>
+      </div>
+    </article>
+
+    <article class="hotel" data-city="Pune">
+      <div class="photo">🌿</div>
+      <div class="details">
+        <h3>Sample Garden Stay</h3>
+        <p>📍 Pune, Maharashtra</p>
+        <p>Garden · Parking · Wi-Fi</p>
+        <div class="price">₹1,500 / night</div>
+        <button onclick="hotelDetails('Sample Garden Stay')">View Details</button>
+      </div>
+    </article>
+  </div>
+
+  <div class="notice">
+    <strong>Demo website:</strong> These hotel names, facilities
+    and prices are fictional examples. No actual hotel availability
+    or booking is offered yet.
+  </div>
+</main>
+
+<footer>
+  <div class="logo">STAY.</div>
+  <p>Discover your next destination.</p>
+  <p>© 2026 STAY. All rights reserved.</p>
+</footer>
+
+<script>
+  function chooseCity(city) {
+    document.getElementById("location").value = city;
+    searchHotels();
+  }
+
+  function searchHotels() {
+    const city = document.getElementById("location").value
+      .trim().toLowerCase();
+    const cards = document.querySelectorAll(".hotel");
+    let count = 0;
+
+    cards.forEach(card => {
+      const match = !city ||
+        card.dataset.city.toLowerCase().includes(city);
+      card.style.display = match ? "block" : "none";
+      if (match) count++;
+    });
+
+    document.getElementById("resultText").textContent =
+      count + " sample hotel(s) found.";
+  }
+
+  function hotelDetails(name) {
+    alert(name + "\n\nThis is a demonstration listing. Real hotel details and booking will be added later.");
+  }
+</script>
+
+</body>
+</html>
