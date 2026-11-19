@@ -1,135 +1,549 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#102c35">
-  <meta name="description" content="Discover hotels and stays across India with STAY.">
-  <title>STAY | Discover Your Stay</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7f6;
-      color: #172c32;
-    }
-    header {
-      background: #102c35;
-      color: white;
-      padding: 20px;
-    }
-    .nav {
-      max-width: 1000px;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo { font-size: 27px; font-weight: bold; letter-spacing: 3px; }
-    .tag { color: #c9dedb; font-size: 12px; }
-    .hero {
-      background: linear-gradient(135deg,#153d45,#327c72);
-      color: white;
-      padding: 48px 20px;
-      text-align: center;
-    }
-    .hero h1 { font-size: 34px; margin: 0 0 12px; }
-    .hero p { color: #d9e9e5; line-height: 1.6; }
-    .search {
-      background: white;
-      color: #172c32;
-      max-width: 900px;
-      margin: 25px auto 0;
-      padding: 18px;
-      border-radius: 15px;
-      display: grid;
-      grid-template-columns: repeat(2,1fr);
-      gap: 12px;
-      text-align: left;
-    }
-    label { font-size: 12px; font-weight: bold; }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-top: 7px;
-      border: 1px solid #dce4e1;
-      border-radius: 8px;
-      font-size: 14px;
-      background: white;
-    }
-    button {
-      background: #d69d55;
-      color: #172c32;
-      border: none;
-      padding: 14px;
-      border-radius: 9px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .search button { grid-column: 1/-1; }
-    main { max-width: 1000px; margin: auto; padding: 28px 18px; }
-    h2 { font-size: 23px; }
-    .sub { color: #687b7b; font-size: 14px; }
-    .cities {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin: 20px 0;
-    }
-    .city {
-      background: #e3eeeb;
-      border-radius: 30px;
-      padding: 10px 16px;
-      font-size: 13px;
-      cursor: pointer;
-    }
-    .hotels {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
-      gap: 17px;
-    }
-    .hotel {
-      background: white;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 3px 15px #193c3c12;
-    }
-    .photo {
-      height: 145px;
-      display: grid;
-      place-items: center;
-      font-size: 65px;
-      background: linear-gradient(135deg,#b7d5c9,#e6d7bd);
-    }
-    .details { padding: 16px; }
-    .details h3 { margin: 0 0 8px; }
-    .details p { color: #71817d; font-size: 13px; }
-    .price { font-weight: bold; margin: 15px 0; }
-    .details button { width: 100%; }
-    .notice {
-      background: #fff4df;
-      padding: 14px;
-      border-radius: 10px;
-      font-size: 13px;
-      line-height: 1.5;
-      margin-top: 25px;
-    }
-    footer {
-      background: #102c35;
-      color: white;
-      padding: 25px;
-      text-align: center;
-      font-size: 13px;
-    }
-    @media(max-width:480px) {
-      .hero h1 { font-size: 28px; }
-      .search { grid-template-columns: 1fr; }
-      .search button { grid-column: auto; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#102c35">
+<meta name="description" content="Discover beautiful hotels and stays across India with STAY.">
+
+<title>STAY | Discover India</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f6f4;
+  color: #183238;
+}
+
+button, input, select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* NAVIGATION */
+
+header {
+  background: #102c35;
+  color: white;
+  padding: 18px 22px;
+}
+
+.nav {
+  max-width: 1150px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 29px;
+  font-weight: bold;
+  letter-spacing: 4px;
+}
+
+.tag {
+  font-size: 11px;
+  color: #bcd5d2;
+  margin-top: 4px;
+}
+
+.nav-right {
+  font-size: 14px;
+  color: #d5e3e1;
+}
+
+/* HERO */
+
+.hero {
+  background: linear-gradient(135deg, #123942, #26796f);
+  color: white;
+  padding: 55px 18px 45px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(30px, 6vw, 48px);
+  margin: 0 0 14px;
+}
+
+.hero p {
+  color: #d9e9e6;
+  line-height: 1.7;
+  max-width: 650px;
+  margin: auto;
+}
+
+.search-box {
+  max-width: 1000px;
+  background: white;
+  padding: 20px;
+  border-radius: 18px;
+  margin: 35px auto 0;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr .7fr;
+  gap: 13px;
+  text-align: left;
+  color: #183238;
+  box-shadow: 0 12px 35px #0002;
+}
+
+.field label {
+  display: block;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 13px 10px;
+  border: 1px solid #dce4e1;
+  border-radius: 9px;
+  background: white;
+  color: #183238;
+  outline: none;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: #26796f;
+}
+
+.search-button {
+  grid-column: 1/-1;
+  padding: 15px;
+  background: #d9a15c;
+  color: #183238;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.search-button:hover {
+  background: #c88d43;
+}
+
+/* MAIN */
+
+main {
+  max-width: 1150px;
+  margin: auto;
+  padding: 35px 18px;
+}
+
+.section-heading {
+  margin-bottom: 8px;
+  font-size: 26px;
+}
+
+.subtitle {
+  color: #738581;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* DESTINATIONS */
+
+.destinations {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 14px;
+  margin: 24px 0 42px;
+}
+
+.destination {
+  min-height: 135px;
+  border: none;
+  border-radius: 14px;
+  color: white;
+  text-align: left;
+  padding: 18px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.destination::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg,#0009,#0001);
+}
+
+.destination span {
+  position: relative;
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.destination small {
+  position: relative;
+  display: block;
+  margin-top: 8px;
+  color: white;
+}
+
+.destination:hover {
+  transform: translateY(-2px);
+}
+
+.dest-chandrapur {
+  background-image: url("https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=600&q=80");
+}
+
+.dest-nagpur {
+  background-image: url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=600&q=80");
+}
+
+.dest-mumbai {
+  background-image: url("https://images.unsplash.com/photo-1570168007204-0f4c7e7e2e6b?auto=format&fit=crop&w=600&q=80");
+}
+
+.dest-pune {
+  background-image: url("https://images.unsplash.com/photo-1562979314-3507a1c2f0c9?auto=format&fit=crop&w=600&q=80");
+}
+
+/* FILTERS */
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 25px 0;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter {
+  padding: 10px 15px;
+  border-radius: 30px;
+  border: 1px solid #d5e1dd;
+  background: white;
+  color: #183238;
+}
+
+.filter.active {
+  background: #153c43;
+  color: white;
+  border-color: #153c43;
+}
+
+.sort-select {
+  padding: 11px;
+  border: 1px solid #d5e1dd;
+  border-radius: 9px;
+  background: white;
+}
+
+/* HOTEL CARDS */
+
+.hotel-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+
+.hotel-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px #193c3c0c;
+  transition: .2s;
+}
+
+.hotel-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px #193c3c15;
+}
+
+.hotel-image {
+  height: 200px;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+.hotel-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hotel-label {
+  position: absolute;
+  top: 13px;
+  left: 13px;
+  background: white;
+  padding: 7px 11px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.favorite {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: white;
+  border: none;
+  font-size: 20px;
+}
+
+.favorite.saved {
+  color: #e44b64;
+}
+
+.hotel-info {
+  padding: 17px;
+}
+
+.hotel-info h3 {
+  font-size: 18px;
+  margin: 0 0 9px;
+}
+
+.location {
+  color: #72837e;
+  font-size: 13px;
+}
+
+.amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 14px 0;
+}
+
+.amenity {
+  background: #edf3f0;
+  padding: 7px 9px;
+  border-radius: 6px;
+  font-size: 11px;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+  gap: 8px;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.price small {
+  display: block;
+  font-size: 11px;
+  font-weight: normal;
+  color: #77847e;
+  margin-top: 4px;
+}
+
+.details-button {
+  background: #153c43;
+  color: white;
+  border: none;
+  padding: 11px 15px;
+  border-radius: 8px;
+}
+
+.details-button:hover {
+  background: #26796f;
+}
+
+.no-results {
+  text-align: center;
+  padding: 45px 15px;
+  background: white;
+  border-radius: 15px;
+  color: #71817d;
+  grid-column: 1/-1;
+}
+
+/* NOTICE */
+
+.demo-notice {
+  background: #fff2dc;
+  border: 1px solid #f1dfc0;
+  padding: 16px;
+  border-radius: 12px;
+  margin: 30px 0;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* MODAL */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: #0009;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+  z-index: 999;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 18px;
+  padding: 25px;
+  max-height: 85vh;
+  overflow: auto;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+.modal-close {
+  float: right;
+  border: none;
+  background: #edf2ef;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 20px;
+}
+
+.modal-text {
+  line-height: 1.8;
+  color: #647671;
+}
+
+.modal-action {
+  width: 100%;
+  padding: 14px;
+  background: #d9a15c;
+  color: #183238;
+  border: none;
+  border-radius: 9px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+/* FOOTER */
+
+footer {
+  background: #102c35;
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+footer p {
+  color: #c9dedb;
+  font-size: 13px;
+}
+
+/* MOBILE */
+
+@media(max-width:750px) {
+  .search-box {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .destinations {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hotel-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hotel-image {
+    height: 160px;
+  }
+}
+
+@media(max-width:480px) {
+  header {
+    padding: 16px;
+  }
+
+  .nav-right {
+    font-size: 12px;
+  }
+
+  .hero {
+    padding: 38px 15px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .search-box {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 16px;
+    margin-top: 25px;
+  }
+
+  main {
+    padding: 28px 14px;
+  }
+
+  .destinations {
+    gap: 9px;
+  }
+
+  .destination {
+    min-height: 110px;
+    padding: 13px;
+  }
+
+  .destination span {
+    font-size: 16px;
+  }
+
+  .hotel-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .hotel-image {
+    height: 210px;
+  }
+
+  .toolbar {
+    align-items: flex-start;
+  }
+}
+</style>
 </head>
+
 <body>
 
 <header>
@@ -138,134 +552,351 @@
       <div class="logo">STAY.</div>
       <div class="tag">DISCOVER YOUR STAY</div>
     </div>
-    <div>India's Hotel Guide</div>
+    <div class="nav-right">India's Hotel Guide</div>
   </div>
 </header>
 
 <section class="hero">
   <h1>Find Your Perfect Stay</h1>
-  <p>Discover places to stay, explore destinations<br>and plan your next journey.</p>
+  <p>Discover hotels, explore India's beautiful destinations<br>
+  and make your next journey memorable.</p>
 
-  <div class="search">
-    <div>
-      <label for="location">DESTINATION</label>
-      <input id="location" placeholder="Enter city, e.g. Chandrapur">
+  <div class="search-box">
+    <div class="field">
+      <label>DESTINATION</label>
+      <input id="location" placeholder="City or destination">
     </div>
-    <div>
-      <label for="checkin">CHECK-IN</label>
+
+    <div class="field">
+      <label>CHECK-IN</label>
       <input id="checkin" type="date">
     </div>
-    <div>
-      <label for="checkout">CHECK-OUT</label>
+
+    <div class="field">
+      <label>CHECK-OUT</label>
       <input id="checkout" type="date">
     </div>
-    <div>
-      <label for="guests">GUESTS</label>
+
+    <div class="field">
+      <label>GUESTS</label>
       <input id="guests" type="number" min="1" value="2">
     </div>
-    <button onclick="searchHotels()">Search Hotels</button>
+
+    <button class="search-button" onclick="searchHotels()">
+      Search Stays
+    </button>
   </div>
 </section>
 
 <main>
-  <h2>Explore Destinations</h2>
-  <p class="sub">Choose a destination to explore.</p>
 
-  <div class="cities">
-    <span class="city" onclick="chooseCity('Chandrapur')">📍 Chandrapur</span>
-    <span class="city" onclick="chooseCity('Nagpur')">📍 Nagpur</span>
-    <span class="city" onclick="chooseCity('Mumbai')">📍 Mumbai</span>
-    <span class="city" onclick="chooseCity('Pune')">📍 Pune</span>
+  <h2 class="section-heading">Explore India</h2>
+  <p class="subtitle">Choose a city and discover places to stay.</p>
+
+  <div class="destinations">
+    <button class="destination dest-chandrapur" onclick="chooseCity('Chandrapur')">
+      <span>Chandrapur</span>
+      <small>Explore stays →</small>
+    </button>
+
+    <button class="destination dest-nagpur" onclick="chooseCity('Nagpur')">
+      <span>Nagpur</span>
+      <small>Explore stays →</small>
+    </button>
+
+    <button class="destination dest-mumbai" onclick="chooseCity('Mumbai')">
+      <span>Mumbai</span>
+      <small>Explore stays →</small>
+    </button>
+
+    <button class="destination dest-pune" onclick="chooseCity('Pune')">
+      <span>Pune</span>
+      <small>Explore stays →</small>
+    </button>
   </div>
 
-  <h2>Discover Stays</h2>
-  <p class="sub" id="resultText">Explore our sample hotel listings.</p>
+  <h2 class="section-heading">Discover Stays</h2>
+  <p class="subtitle" id="resultText">Explore our sample hotel listings.</p>
 
-  <div class="hotels" id="hotelList">
-    <article class="hotel" data-city="Chandrapur">
-      <div class="photo">🏨</div>
-      <div class="details">
-        <h3>Sample Comfort Stay</h3>
-        <p>📍 Chandrapur, Maharashtra</p>
-        <p>Wi-Fi · Parking · AC</p>
-        <div class="price">₹1,200 / night</div>
-        <button onclick="hotelDetails('Sample Comfort Stay')">View Details</button>
-      </div>
-    </article>
+  <div class="toolbar">
+    <div class="filters">
+      <button class="filter active" onclick="setFilter('all',this)">All</button>
+      <button class="filter" onclick="setFilter('budget',this)">Budget</button>
+      <button class="filter" onclick="setFilter('premium',this)">Premium</button>
+      <button class="filter" onclick="setFilter('saved',this)">♥ Saved</button>
+    </div>
 
-    <article class="hotel" data-city="Nagpur">
-      <div class="photo">🏩</div>
-      <div class="details">
-        <h3>Sample City Retreat</h3>
-        <p>📍 Nagpur, Maharashtra</p>
-        <p>Wi-Fi · Restaurant · AC</p>
-        <div class="price">₹1,800 / night</div>
-        <button onclick="hotelDetails('Sample City Retreat')">View Details</button>
-      </div>
-    </article>
-
-    <article class="hotel" data-city="Mumbai">
-      <div class="photo">🌆</div>
-      <div class="details">
-        <h3>Sample Urban Escape</h3>
-        <p>📍 Mumbai, Maharashtra</p>
-        <p>Wi-Fi · City View · AC</p>
-        <div class="price">₹2,500 / night</div>
-        <button onclick="hotelDetails('Sample Urban Escape')">View Details</button>
-      </div>
-    </article>
-
-    <article class="hotel" data-city="Pune">
-      <div class="photo">🌿</div>
-      <div class="details">
-        <h3>Sample Garden Stay</h3>
-        <p>📍 Pune, Maharashtra</p>
-        <p>Garden · Parking · Wi-Fi</p>
-        <div class="price">₹1,500 / night</div>
-        <button onclick="hotelDetails('Sample Garden Stay')">View Details</button>
-      </div>
-    </article>
+    <select class="sort-select" id="sortSelect" onchange="searchHotels()">
+      <option value="default">Recommended</option>
+      <option value="low">Price: Low to High</option>
+      <option value="high">Price: High to Low</option>
+    </select>
   </div>
 
-  <div class="notice">
-    <strong>Demo website:</strong> These hotel names, facilities
-    and prices are fictional examples. No actual hotel availability
-    or booking is offered yet.
+  <div class="hotel-grid" id="hotelList"></div>
+
+  <div class="demo-notice">
+    <strong>Demo Version:</strong> STAY is currently a prototype.
+    Hotels, prices, photos and facilities shown here are sample content.
+    Real hotel listings, availability and booking services are not connected yet.
   </div>
+
 </main>
 
 <footer>
   <div class="logo">STAY.</div>
   <p>Discover your next destination.</p>
   <p>© 2026 STAY. All rights reserved.</p>
+  <p>Made for travellers across India 🇮🇳</p>
 </footer>
 
+<!-- HOTEL DETAIL POPUP -->
+
+<div class="modal" id="hotelModal" onclick="closeModalOutside(event)">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h2 id="modalTitle">Hotel Details</h2>
+    <div class="modal-text" id="modalText"></div>
+    <button class="modal-action" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
 <script>
-  function chooseCity(city) {
-    document.getElementById("location").value = city;
-    searchHotels();
+
+const hotels = [
+  {
+    id: 1,
+    name: "Sample Comfort Stay",
+    city: "Chandrapur",
+    price: 1200,
+    category: "budget",
+    rating: "Sample",
+    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80",
+    amenities: ["Wi-Fi", "Parking", "AC"],
+    description: "A sample accommodation listing for travellers visiting Chandrapur."
+  },
+  {
+    id: 2,
+    name: "Sample City Retreat",
+    city: "Nagpur",
+    price: 1800,
+    category: "premium",
+    rating: "Sample",
+    image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=900&q=80",
+    amenities: ["Wi-Fi", "Restaurant", "AC"],
+    description: "A sample city stay for guests exploring Nagpur."
+  },
+  {
+    id: 3,
+    name: "Sample Urban Escape",
+    city: "Mumbai",
+    price: 2500,
+    category: "premium",
+    rating: "Sample",
+    image: "https://images.unsplash.com/photo-1566665797738-1674de7a421a?auto=format&fit=crop&w=900&q=80",
+    amenities: ["City View", "Wi-Fi", "AC"],
+    description: "A fictional sample listing for a Mumbai city stay."
+  },
+  {
+    id: 4,
+    name: "Sample Garden Stay",
+    city: "Pune",
+    price: 1500,
+    category: "budget",
+    rating: "Sample",
+    image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=900&q=80",
+    amenities: ["Garden", "Parking", "Wi-Fi"],
+    description: "A sample peaceful garden-style stay in Pune."
+  },
+  {
+    id: 5,
+    name: "Sample Luxury Escape",
+    city: "Mumbai",
+    price: 4200,
+    category: "premium",
+    rating: "Sample",
+    image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=900&q=80",
+    amenities: ["Pool", "Restaurant", "Luxury"],
+    description: "A fictional premium hotel example."
+  },
+  {
+    id: 6,
+    name: "Sample Traveller Lodge",
+    city: "Chandrapur",
+    price: 850,
+    category: "budget",
+    rating: "Sample",
+    image: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=900&q=80",
+    amenities: ["Parking", "Basic Rooms", "Wi-Fi"],
+    description: "A fictional budget stay example."
+  }
+];
+
+let currentFilter = "all";
+
+function getSaved() {
+  try {
+    return JSON.parse(localStorage.getItem("staySaved") || "[]");
+  } catch {
+    return [];
+  }
+}
+
+function saveFavorite(id) {
+  let saved = getSaved();
+
+  if (saved.includes(id)) {
+    saved = saved.filter(x => x !== id);
+  } else {
+    saved.push(id);
   }
 
-  function searchHotels() {
-    const city = document.getElementById("location").value
-      .trim().toLowerCase();
-    const cards = document.querySelectorAll(".hotel");
-    let count = 0;
+  localStorage.setItem("staySaved", JSON.stringify(saved));
+  searchHotels();
+}
 
-    cards.forEach(card => {
-      const match = !city ||
-        card.dataset.city.toLowerCase().includes(city);
-      card.style.display = match ? "block" : "none";
-      if (match) count++;
-    });
+function chooseCity(city) {
+  document.getElementById("location").value = city;
+  searchHotels();
+  document.getElementById("hotelList").scrollIntoView({
+    behavior: "smooth"
+  });
+}
 
-    document.getElementById("resultText").textContent =
-      count + " sample hotel(s) found.";
+function setFilter(filter, button) {
+  currentFilter = filter;
+
+  document.querySelectorAll(".filter").forEach(btn => {
+    btn.classList.remove("active");
+  });
+
+  button.classList.add("active");
+  searchHotels();
+}
+
+function searchHotels() {
+  const city = document.getElementById("location")
+    .value.trim().toLowerCase();
+
+  const saved = getSaved();
+  const sort = document.getElementById("sortSelect").value;
+
+  let list = hotels.filter(hotel => {
+    const cityMatch = !city ||
+      hotel.city.toLowerCase().includes(city) ||
+      hotel.name.toLowerCase().includes(city);
+
+    const filterMatch =
+      currentFilter === "all" ||
+      hotel.category === currentFilter ||
+      (currentFilter === "saved" && saved.includes(hotel.id));
+
+    return cityMatch && filterMatch;
+  });
+
+  if (sort === "low") {
+    list.sort((a,b) => a.price - b.price);
   }
 
-  function hotelDetails(name) {
-    alert(name + "\n\nThis is a demonstration listing. Real hotel details and booking will be added later.");
+  if (sort === "high") {
+    list.sort((a,b) => b.price - a.price);
   }
+
+  document.getElementById("resultText").textContent =
+    list.length + " sample stay(s) found.";
+
+  const container = document.getElementById("hotelList");
+
+  if (!list.length) {
+    container.innerHTML = `
+      <div class="no-results">
+        <h3>No sample stays found</h3>
+        <p>Try another city or select All.</p>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = list.map(hotel => {
+    const isSaved = saved.includes(hotel.id);
+
+    return `
+      <article class="hotel-card">
+        <div class="hotel-image">
+          <img src="${hotel.image}"
+               alt="${hotel.name}"
+               loading="lazy"
+               onerror="this.style.display='none'">
+          <span class="hotel-label">
+            ${hotel.category === "budget" ? "Budget Stay" : "Premium Stay"}
+          </span>
+
+          <button class="favorite ${isSaved ? "saved" : ""}"
+            onclick="saveFavorite(${hotel.id})"
+            aria-label="Save hotel">
+            ${isSaved ? "♥" : "♡"}
+          </button>
+        </div>
+
+        <div class="hotel-info">
+          <h3>${hotel.name}</h3>
+          <div class="location">📍 ${hotel.city}, India</div>
+
+          <div class="amenities">
+            ${hotel.amenities.map(a =>
+              `<span class="amenity">${a}</span>`
+            ).join("")}
+          </div>
+
+          <div class="price-row">
+            <div class="price">
+              ₹${hotel.price.toLocaleString("en-IN")}
+              <small>per night · sample price</small>
+            </div>
+
+            <button class="details-button"
+              onclick="showDetails(${hotel.id})">
+              Details
+            </button>
+          </div>
+        </div>
+      </article>`;
+  }).join("");
+}
+
+function showDetails(id) {
+  const hotel = hotels.find(h => h.id === id);
+  if (!hotel) return;
+
+  document.getElementById("modalTitle").textContent = hotel.name;
+
+  document.getElementById("modalText").innerHTML = `
+    <p>📍 ${hotel.city}, India</p>
+    <p>💰 Sample price: ₹${hotel.price.toLocaleString("en-IN")} per night</p>
+    <p>🏨 Category: ${hotel.category}</p>
+    <p>✨ Facilities: ${hotel.amenities.join(", ")}</p>
+    <p>${hotel.description}</p>
+    <p><strong>Booking is not available yet.</strong></p>
+  `;
+
+  document.getElementById("hotelModal").classList.add("show");
+}
+
+function closeModal() {
+  document.getElementById("hotelModal").classList.remove("show");
+}
+
+function closeModalOutside(event) {
+  if (event.target.id === "hotelModal") {
+    closeModal();
+  }
+}
+
+document.getElementById("checkin").addEventListener("change", function() {
+  document.getElementById("checkout").min = this.value;
+});
+
+searchHotels();
+
 </script>
 
 </body>
